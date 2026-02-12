@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G-Excel Autofill</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="popup-container">
+
+    <!-- ═══════ Header ═══════ -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="header-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="8" y1="13" x2="16" y2="13"/>
+            <line x1="8" y1="17" x2="16" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h1>G-Excel</h1>
+      </div>
+      <span class="header-badge">Autofill</span>
+    </header>
+
+    <!-- ═══════ Tab Navigation ═══════ -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="data">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Data
+      </button>
+      <button class="tab" data-tab="mapping">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Mapping
+      </button>
+      <button class="tab" data-tab="settings">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </button>
+      <button class="tab" data-tab="profiles">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Profiles
+      </button>
+    </nav>
+
+    <!-- ═══════ Tab Content ═══════ -->
+
+    <!-- DATA TAB -->
+    <div class="tab-content active" id="data-tab">
+      <!-- Upload area -->
+      <div class="upload-area" id="upload-area">
+        <div class="upload-icon">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+        </div>
+        <p class="upload-text">Drop Excel/CSV file here or <span class="upload-link">browse</span></p>
+        <p class="upload-hint">.xlsx, .xls, .csv supported</p>
+        <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden>
+      </div>
+
+      <!-- File info -->
+      <div class="file-info" id="file-info" style="display:none;">
+        <div class="file-info-header">
+          <div class="file-meta">
+            <span class="file-name" id="file-name"></span>
+            <span class="file-size" id="file-size"></span>
+          </div>
+          <button class="btn-icon" id="clear-file" title="Remove file">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <!-- Sheet selector -->
+        <div class="control-row" id="sheet-selector-container" style="display:none;">
+          <label>Sheet:</label>
+          <select id="sheet-selector" class="select-field"></select>
+        </div>
+
+        <!-- Row info -->
+        <div class="info-bar" id="info-bar">
+          <span id="row-count"></span>
+          <span id="col-count"></span>
+        </div>
+      </div>
+
+      <!-- Data preview -->
+      <div class="data-preview" id="data-preview" style="display:none;">
+        <h3 class="section-title">Preview <span class="muted" id="preview-note">(first 5 rows)</span></h3>
+        <div class="table-wrapper">
+          <table id="preview-table">
+            <thead id="preview-thead"></thead>
+            <tbody id="preview-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAPPING TAB -->
+    <div class="tab-content" id="mapping-tab">
+      <div class="mapping-toolbar">
+        <button class="btn btn-primary" id="auto-map-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Auto-Map
+        </button>
+        <button class="btn btn-ghost" id="clear-map-btn">Clear All</button>
+        <button class="btn btn-ghost" id="detect-fields-btn">Re-Detect</button>
+      </div>
+
+      <div class="mapping-header">
+        <span>Excel Column</span>
+        <span></span>
+        <span>Form Field</span>
+      </div>
+      <div class="mapping-grid" id="mapping-grid">
+        <div class="empty-state" id="mapping-empty">
+          <p>Upload an Excel file first, then switch to this tab to map columns to form fields.</p>
+        </div>
+      </div>
+
+      <!-- Fill controls -->
+      <div class="fill-controls" id="fill-controls" style="display:none;">
+        <div class="control-row">
+          <label>Row:</label>
+          <div class="row-nav">
+            <button class="btn-icon" id="prev-row" title="Previous row">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span id="current-row-display">1 / 1</span>
+            <button class="btn-icon" id="next-row" title="Next row">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="fill-actions">
+          <button class="btn btn-success" id="fill-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Fill Row
+          </button>
+          <button class="btn btn-warning" id="fill-batch-btn">Batch Fill All</button>
+          <button class="btn btn-danger" id="stop-fill-btn" style="display:none;">Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div class="tab-content" id="settings-tab">
+      <h3 class="section-title">Fill Options</h3>
+
+      <div class="settings-group">
+        <div class="control-row">
+          <label for="fill-mode">Fill Mode</label>
+          <select id="fill-mode" class="select-field">
+            <option value="single">Single Row</option>
+            <option value="batch">Batch (All Rows)</option>
+            <option value="preview">Preview Only</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="delay">Delay Between Rows</label>
+          <div class="input-suffix">
+            <input type="number" id="delay" class="input-field" min="0" max="5000" value="500" step="100">
+            <span>ms</span>
+          </div>
+        </div>
+
+        <div class="control-toggle">
+          <label for="auto-submit">Auto-submit after fill</label>
+          <input type="checkbox" id="auto-submit" class="toggle">
+        </div>
+
+        <div class="control-toggle">
+          <label for="skip-filled">Skip already-filled fields</label>
+          <input type="checkbox" id="skip-filled" class="toggle">
+        </div>
+
+        <div class="control-toggle">
+          <label for="highlight-fields">Highlight filled fields</label>
+          <input type="checkbox" id="highlight-fields" class="toggle" checked>
+        </div>
+
+        <div class="control-toggle">
+          <label for="stop-on-error">Stop on validation error</label>
+          <input type="checkbox" id="stop-on-error" class="toggle" checked>
+        </div>
+      </div>
+
+      <h3 class="section-title">Privacy</h3>
+      <div class="settings-group">
+        <div class="control-toggle">
+          <label for="persist-data">Remember data this session</label>
+          <input type="checkbox" id="persist-data" class="toggle">
+        </div>
+        <div class="control-toggle">
+          <label for="enable-logging">Enable debug logging</label>
+          <input type="checkbox" id="enable-logging" class="toggle">
+        </div>
+      </div>
+
+      <div class="settings-actions">
+        <button class="btn btn-ghost" id="reset-settings">Reset to Defaults</button>
+        <button class="btn btn-primary" id="save-settings">Save Settings</button>
+      </div>
+    </div>
+
+    <!-- PROFILES TAB -->
+    <div class="tab-content" id="profiles-tab">
+      <h3 class="section-title">Saved Profiles</h3>
+      <div id="profiles-list" class="profiles-list">
+        <div class="empty-state" id="profiles-empty">
+          <p>No saved profiles yet. Map and fill a form, then save it as a profile.</p>
+        </div>
+      </div>
+
+      <div class="control-toggle" style="margin-top: 12px;">
+        <label for="auto-save-profile">Auto-save mapping for this site</label>
+        <input type="checkbox" id="auto-save-profile" class="toggle">
+      </div>
+    </div>
+
+    <!-- ═══════ Status Bar ═══════ -->
+    <footer class="status-bar">
+      <div class="status-left">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="status-message" id="status-message">Ready</span>
+      </div>
+      <div class="status-right">
+        <progress id="progress-bar" value="0" max="100" style="display:none;"></progress>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="../lib/xlsx.full.min.js"></script>
+  <script src="../utils/logger.js"></script>
+  <script src="../utils/synonyms.js"></script>
+  <script src="../utils/storage.js"></script>
+  <script src="../core/validator.js"></script>
+  <script src="../core/matcher.js"></script>
+  <script src="../core/mapper.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
