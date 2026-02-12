@@ -108,11 +108,22 @@ const Filler = (() => {
                 }
             } else {
                 // Use native setter for React compatibility
-                const nativeSetter = Object.getOwnPropertyDescriptor(
-                    window.HTMLInputElement.prototype, 'value'
-                )?.set || Object.getOwnPropertyDescriptor(
-                    window.HTMLTextAreaElement.prototype, 'value'
-                )?.set;
+                // Must pick the correct prototype based on element type
+                let nativeSetter;
+                const tag = element.tagName;
+                if (tag === 'TEXTAREA') {
+                    nativeSetter = Object.getOwnPropertyDescriptor(
+                        window.HTMLTextAreaElement.prototype, 'value'
+                    )?.set;
+                } else if (tag === 'SELECT') {
+                    nativeSetter = Object.getOwnPropertyDescriptor(
+                        window.HTMLSelectElement.prototype, 'value'
+                    )?.set;
+                } else {
+                    nativeSetter = Object.getOwnPropertyDescriptor(
+                        window.HTMLInputElement.prototype, 'value'
+                    )?.set;
+                }
 
                 if (nativeSetter) {
                     nativeSetter.call(element, String(finalValue));
